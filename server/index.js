@@ -1,15 +1,17 @@
-const express = require("express");
+//const express = require("express");
+import express from "express";
+import cors from 'cors';
+//const cors = require("cors");
 const app = express();
-const cors = require("cors");
 const port = 3042;
 
 app.use(cors());
 app.use(express.json());
 
 const balances = {
-  "0x1": 100,
-  "0x2": 50,
-  "0x3": 75,
+  "03245318ab1a79a1e25fee3388cc05d517787f4e213ebd3c949564a443c330718b": 100,
+  "037ae25a6203d635df5f9a969d85873a5a0d6b8bc0fb11515a41d72240cc6d7e5d": 50,
+  "0266f84af2274b1a63975aadd118758ce5b26245e3cffe4158de57cea6039b5843": 75,
 };
 
 app.get("/balance/:address", (req, res) => {
@@ -19,6 +21,7 @@ app.get("/balance/:address", (req, res) => {
 });
 
 app.post("/send", (req, res) => {
+  // Here you must compelete your project.
   const { sender, recipient, amount } = req.body;
 
   setInitialBalance(sender);
@@ -42,3 +45,5 @@ function setInitialBalance(address) {
     balances[address] = 0;
   }
 }
+
+export default setInitialBalance;
